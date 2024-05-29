@@ -1,0 +1,19 @@
+{
+  "name": "quizzgame",
+  "version": "1.0.0",
+  "description": "A dynamic quiz application built with TypeScript and bundled with Webpack. Users can answer a series of questions within a set time limit and toggle between light and dark mode.",
+  "main": "dist/bundle.js",
+  "scripts": {
+   
+    "build" : "webpack "
+  },
+  "author": "LAHOUAZI Milia",
+  "keywords": [],
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  }
+}
