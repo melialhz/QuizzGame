@@ -3,6 +3,7 @@ body {
     background-color: white;
     color: black;
     font-family: 'Annie Use Your Telescope', handwriting;
+    font-size: large;
   }
   
   .answers label {
@@ -43,4 +44,64 @@ body {
       opacity: 1;
     }
   }
+  #quiz-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   
+  }
+   
+  body h1{ 
+     align-items: center; /* Centrer horizontalement */
+    justify-content: flex-start; /* Aligner en haut */}
+
+  #question-text {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  .answers label {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  button {
+    margin-top: 20px;
+    background-color : rgb(182, 202, 32);
+    border-radius: 5%;
+  }
+  
+  .score {
+    margin-top: 20px;
+    font-size: 2em;
+  }
+  #next-button {
+    font-size: large;
+    height: 10%;
+    width: 50%;
+    position: fixed;
+    bottom: 250px; /* Position par rapport au bas de la fenêtre */
+    right: 400px; /* Position par rapport à la droite de la fenêtre */
+    z-index: 1; /* Assure que le bouton est au-dessus des autres éléments */
+  }
+  #restart-button {
+    width: 50%;
+    height: 10%;
+    position: fixed;
+    bottom: 150px; /* Position par rapport au bas de la fenêtre */
+   right: 400px; /* Position par rapport à la droite de la fenêtre */
+    z-index: 1; /* Assure que le bouton est au-dessus des autres éléments */
+    background-color: rgb(189, 21, 21);
+    font-size: large;
+  }
+  #timer {
+    position: fixed;
+    bottom: 80px; /* Position par rapport au bas de la fenêtre */
+    right: 50px; /* Position par rapport à la droite de la fenêtre */
+    z-index: 1; /* Assure que le timer est au-dessus des autres éléments */
+    font-size: 2rem;
+  }

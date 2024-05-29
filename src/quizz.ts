@@ -102,11 +102,11 @@ export class Quiz {
   }
 
   private endQuiz() {
-    this.questionTextElement.textContent = "Quiz terminé !";
+    this.questionTextElement.textContent = `Quiz terminé ! Your score is : ${this.score}/${this.currentQuestionIndex}`;
     this.answersContainer.innerHTML = "";
     this.nextButton.style.display = "none";
     this.restartButton.style.display = "block";
-    this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.questions.length}`;
+    this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.currentQuestionIndex}`;
     this.resetTimer();
   }
 

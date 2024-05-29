@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.bunny.net/css?family=annie-use-your-telescope:400" rel="stylesheet" />
     <title>QuizZ</title>
     <link rel="stylesheet" href="src/styles.css">
 </head>
 <body >
      <!-- Titre principal -->
-     <h1 class="text-5xl text-center mt-10 mb-5 main-title">Welcome to your Puzzle Game</h1>
+     <h1 >Welcome to your QuizZ Game</h1>
       <!-- Score -->
-      <h1 class="text-5xl text-center score">Your <span id="score">0</span></h1>
+      <h1 >Your <span id="score">0</span></h1>
       <div id="question-mark-container"></div>
+
+
     <div id="quiz-container">
         <div id="question-text"></div>
         <div class="answers"></div>
-        <button id="next-button">Suivant</button>
-        <button id="restart-button" style="display: none;">Recommencer</button>
        
-        <div id="timer"></div>
     </div>
-  
+
+
+    <button id="restart-button" style="display: none;">Recommencer</button>
+    <button id="next-button">Suivant</button>
+    <div id="timer"></div>
     <script src="dist/bundle.js"></script>
 </body>
 </html>
