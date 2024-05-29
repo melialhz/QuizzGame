@@ -1,18 +1,24 @@
-
 body {
-    background-color: white;
-    color: black;
-    font-family: 'Annie Use Your Telescope', handwriting;
-    font-size: large;
-  }
+  background-color: white;
+  color: black;
+  font-family: 'Annie Use Your Telescope', handwriting;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: large;
+}
+
+#title-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
   .dark-mode {
     background-color: black;
     color: white;
 } 
-#toggle-mode-button{
 
-    background-color: aqua;
-}
+
   .answers label {
     display: block;
     margin: 5px 0;
@@ -66,7 +72,7 @@ body {
     background-color: rgb(28, 27, 27);
 }
    
-  body h1{ 
+  body h2{ 
      align-items: center; /* Centrer horizontalement */
     justify-content: flex-start; /* Aligner en haut */}
 
@@ -90,7 +96,7 @@ body {
     margin-top: 20px;
     font-size: 2em;
   }
-  #next-button {
+  #next-button , #restart-button  {
     font-size: large;
     height: 10%;
     width: 50%;
@@ -100,14 +106,7 @@ body {
     z-index: 1; /* Assure que le bouton est au-dessus des autres éléments */
   }
   #restart-button {
-    width: 50%;
-    height: 10%;
-    position: fixed;
-    bottom: 150px; /* Position par rapport au bas de la fenêtre */
-   right: 400px; /* Position par rapport à la droite de la fenêtre */
-    z-index: 1; /* Assure que le bouton est au-dessus des autres éléments */
-    background-color: rgb(189, 21, 21);
-    font-size: large;
+    background-color: rgb(159, 22, 22);
   }
   #timer {
     position: fixed;
@@ -117,13 +116,14 @@ body {
     font-size: 2rem;
   }
 
-  
   .switcher {
     width: 50px;
     height: 30px;
     background-color: #ccc;
     border-radius: 15px;
-    position: relative;
+    position: fixed; /* Changement de position à fixe */
+    top: 10px; /* Distance depuis le haut de la page */
+    left: 10px; /* Distance depuis la gauche de la page */
     transition: background-color 0.3s;
 }
 
@@ -139,10 +139,42 @@ body {
     transition: left 0.3s;
 }
 
+
 .dark-mode .switcher {
     background-color: #555;
 }
 
 .dark-mode .switcher::before {
     left: calc(100% - 30px);
+}
+#high-scores-container {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* Ajustez cette valeur en fonction de vos besoins */
+  max-width: 600px; /* Limitez la largeur pour les grands écrans */
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centre le texte à l'intérieur du conteneur */
+}
+
+#high-scores-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; /* Assurez-vous qu'il n'y a pas de marge */
+}
+
+#high-scores-list li {
+  margin: 1px 0;
+}
+body.dark-mode #quiz-container {
+  background-color: #444;
+}
+
+body.dark-mode #high-scores-container {
+  background-color: #555;
+  color: white;
 }
