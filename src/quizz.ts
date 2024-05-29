@@ -12,6 +12,8 @@ export class Quiz {
   private restartButton: HTMLElement;
   private scoreElement: HTMLElement;
   private timerElement: HTMLElement;
+  private highScoresContainer: HTMLElement;
+  private highScoresList: HTMLElement;
 
   constructor(questions: Question[], timePerQuestion = 8) {
     this.questions = questions;
@@ -26,11 +28,16 @@ export class Quiz {
     this.restartButton = document.getElementById("restart-button")!;
     this.scoreElement = document.getElementById("score")!;
     this.timerElement = document.getElementById("timer")!;
+    this.highScoresContainer = document.getElementById(
+      "high-scores-container"
+    )!;
+    this.highScoresList = document.getElementById("high-scores-list")!;
 
     this.nextButton.addEventListener("click", () => this.goToNextQuestion());
     this.restartButton.addEventListener("click", () => this.restartQuiz());
 
     this.displayQuestion();
+    this.displayHighScores();
   }
 
   private startTimer() {
@@ -108,6 +115,8 @@ export class Quiz {
     this.restartButton.style.display = "block";
     this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.currentQuestionIndex}`;
     this.resetTimer();
+    this.saveHighScore();
+    this.displayHighScores();
   }
 
   private restartQuiz() {
@@ -117,5 +126,20 @@ export class Quiz {
     this.restartButton.style.display = "none";
     this.nextButton.style.display = "block";
     this.scoreElement.textContent = "Score : 0";
+  }
+
+  private saveHighScore() {
+    const highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
+    highScores.push(this.score);
+    highScores.sort((a: number, b: number) => b - a);
+    highScores.splice(5); // Keep only top 5 scores
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+  }
+
+  private displayHighScores() {
+    const highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
+    this.highScoresList.innerHTML = highScores
+      .map((score: number) => `<li>${score}</li>`)
+      .join("");
   }
 }
