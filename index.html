@@ -7,24 +7,25 @@
     <title>QuizZ</title>
     <link rel="stylesheet" href="src/styles.css">
 </head>
-<body > 
+<body> 
     <button id="mode-toggle" class="switcher"></button>
-     <!-- Titre principal -->
-     <h1 >Welcome to your QuizZ Game</h1>
-      <!-- Score -->
-      <h1 >Your <span id="score">0</span></h1>
-      <div id="question-mark-container"></div>
-
-
+    <div id="title-container">
+        <h2>Welcome to your QuizZ Game</h2>
+    </div>
+    <div id="score-container">
+        <h2>Your <span id="score">0</span></h2>
+    </div>
+    <div id="question-mark-container"></div>
     <div id="quiz-container">
         <div id="question-text"></div>
         <div class="answers"></div>
-       
     </div>
-
-
     <button id="restart-button" style="display: none;">Recommencer</button>
     <button id="next-button">Suivant</button>
+    <div id="high-scores-container">
+        <h2>Meilleurs Scores</h2>
+        <ul id="high-scores-list"></ul>
+    </div>
     <div id="timer"></div>
     <script src="dist/bundle.js"></script>
 </body>
