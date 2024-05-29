@@ -7,9 +7,13 @@ export class Quiz {
   private questionTextElement: HTMLElement;
   private answersContainer: HTMLElement;
   private nextButton: HTMLElement;
+  private restartButton: HTMLElement;
   private scoreElement: HTMLElement;
+
   constructor(questions: Question[]) {
     this.questions = questions;
+    this.currentQuestionIndex = 0;
+    this.score = 0;
     this.questionTextElement = document.getElementById("question-text")!;
     this.answersContainer = document.querySelector(".answers")!;
     this.nextButton = document.getElementById("next-button")!;
@@ -17,7 +21,6 @@ export class Quiz {
     this.nextButton.addEventListener("click", () => this.goToNextQuestion());
     this.displayQuestion();
   }
-
   private displayQuestion() {
     const currentQuestion = this.questions[this.currentQuestionIndex];
     this.questionTextElement.textContent = `Question ${
@@ -32,7 +35,6 @@ export class Quiz {
       label.innerHTML = `<input type="radio" name="answer" value="${option}"> ${option}) ${answerText}`;
       this.answersContainer.appendChild(label);
     }
-
     this.questionTextElement.classList.add("show");
     this.answersContainer.classList.add("show");
   }
@@ -57,8 +59,17 @@ export class Quiz {
     if (this.currentQuestionIndex < this.questions.length) {
       this.displayQuestion();
     } else {
+      this.endQuiz();
     }
 
     this.scoreElement.textContent = `Score : ${this.score}/${this.currentQuestionIndex}`;
+  }
+
+  private endQuiz() {
+    this.questionTextElement.textContent = "Quiz terminé !";
+    this.answersContainer.innerHTML = "";
+    this.nextButton.style.display = "none";
+    this.restartButton.style.display = "block";
+    this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.questions.length}`;
   }
 }
