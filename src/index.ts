@@ -1,6 +1,6 @@
 import { Question } from "./question";
 import { Quiz } from "./quizz";
-
+import "./background";
 const questions = [
   new Question(
     "Quelle est la capitale de la France ?",
