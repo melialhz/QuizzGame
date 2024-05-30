@@ -18,8 +18,8 @@ export class Quiz {
   private correctionContent: HTMLElement;
   private restartButtonCorrection: HTMLElement;
   private userAnswers: string[];
-  private clockHand: HTMLElement;
-  private clockElement: HTMLElement;
+  private clockHand: HTMLElement; // Ajout de cette ligne
+  viewCorrectionButton: any;
 
   constructor(questions: Question[], timePerQuestion = 8) {
     this.questions = questions;
@@ -28,6 +28,12 @@ export class Quiz {
     this.score = 0;
     this.timer = null;
     this.userAnswers = [];
+    this.viewCorrectionButton = document.getElementById(
+      "view-correction-button"
+    )!;
+    this.viewCorrectionButton.addEventListener("click", () =>
+      this.displayCorrections()
+    );
 
     this.questionTextElement = document.getElementById("question-text")!;
     this.answersContainer = document.querySelector(".answers")!;
@@ -44,8 +50,7 @@ export class Quiz {
     this.restartButtonCorrection = document.getElementById(
       "restart-button-correction"
     )!;
-    this.clockHand = document.getElementById("hand")!;
-    this.clockElement = document.getElementById("clock")!;
+    this.clockHand = document.getElementById("hand")!; // Ajout de cette ligne
 
     this.nextButton.addEventListener("click", () => this.goToNextQuestion());
     this.restartButton.addEventListener("click", () => this.restartQuiz());
@@ -70,13 +75,6 @@ export class Quiz {
         this.timerElement.textContent = `Temps restant : ${timeLeft} secondes`;
         const rotation = (this.timePerQuestion - timeLeft) * rotationStep;
         this.clockHand.style.transform = `rotate(${rotation}deg)`;
-
-        if (timeLeft <= 4) {
-          this.clockElement.classList.add("red-background");
-        } else {
-          this.clockElement.classList.remove("red-background");
-        }
-
         timeLeft--;
       }
     }, 1000);
@@ -89,7 +87,6 @@ export class Quiz {
     }
     this.timerElement.textContent = "";
     this.clockHand.style.transform = "rotate(0deg)";
-    this.clockElement.classList.remove("red-background");
   }
 
   private displayQuestion() {
@@ -148,12 +145,12 @@ export class Quiz {
     this.answersContainer.innerHTML = "";
     this.nextButton.style.display = "none";
     this.restartButton.style.display = "block"; // Affiche le bouton de redémarrage
-    this.correctionContainer.style.display = "flex";
+    this.viewCorrectionButton.style.display = "block"; // Affiche le bouton de correction
+    this.correctionContainer.style.display = "none"; // Masque les corrections au début
     this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.currentQuestionIndex}`;
     this.resetTimer();
     this.saveHighScore();
     this.displayHighScores();
-    this.displayCorrections(); // Ajoutez cette ligne pour afficher les corrections
   }
 
   private displayCorrections() {
@@ -178,6 +175,7 @@ export class Quiz {
     this.score = 0;
     this.userAnswers = [];
     this.correctionContainer.style.display = "none";
+    this.viewCorrectionButton.style.display = "none"; // Masque le bouton de correction
     this.displayQuestion();
     this.restartButton.style.display = "none";
     this.nextButton.style.display = "block";
@@ -194,11 +192,8 @@ export class Quiz {
 
   private displayHighScores() {
     const highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
-    this.highScoresList.innerHTML = "";
-    highScores.forEach((score: number) => {
-      const li = document.createElement("li");
-      li.textContent = score.toString();
-      this.highScoresList.appendChild(li);
-    });
+    this.highScoresList.innerHTML = highScores
+      .map((score: number) => `<li>${score}</li>`)
+      .join("");
   }
 }

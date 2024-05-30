@@ -13,140 +13,145 @@ body {
   text-align: center;
   margin-top: 20px;
 }
-  .dark-mode {
-    background-color: black;
-    color: white;
-} 
 
-
-  .answers label {
-    display: block;
-    margin: 5px 0;
-  }
-  
-  button {
-    margin: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  #question-mark-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-  }
-  
-  .question-mark {
-    position: absolute;
-    font-size: 4em;
-    color: rgba(117, 130, 22, 0.7); 
-    animation: float 5s linear infinite;
-  }
-  
-  @keyframes float {
-    0% {
-      transform: translateY(100vh);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-100vh);
-      opacity: 1;
-    }
-  }
-  #quiz-container {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 50px;
-    background-color: #dff6a5;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  
-  }
-  .dark-mode #quiz-container {
-    color: white;
-    background-color: rgb(28, 27, 27);
+.dark-mode {
+  background-color: black;
+  color: white;
 }
-   
-  body h2{ 
-     align-items: center; /* Centrer horizontalement */
-    justify-content: flex-start; /* Aligner en haut */}
 
-  #question-text {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
-  
-  .answers label {
-    display: block;
-    margin: 10px 0;
-  }
-  
-  button {
-    margin-top: 20px;
-    background-color : rgb(64, 178, 87);
-    border-radius: 5%;
-  }
-  
-  .score {
-    margin-top: 20px;
-    font-size: 2em;
-  }
-  #next-button , #restart-button  {
-    font-size: large;
-    height: 10%;
-    width: 50%;
-    position: fixed;
-    bottom: 250px; /* Position par rapport au bas de la fenêtre */
-    right: 400px; /* Position par rapport à la droite de la fenêtre */
-    z-index: 1; /* Assure que le bouton est au-dessus des autres éléments */
-  }
-  #restart-button {
-    background-color: rgb(159, 22, 22);
-  }
-  #timer {
-    position: fixed;
-    bottom: 80px; /* Position par rapport au bas de la fenêtre */
-    right: 50px; /* Position par rapport à la droite de la fenêtre */
-    z-index: 1; /* Assure que le timer est au-dessus des autres éléments */
-    font-size: 2rem;
-  }
+.answers label {
+  display: block;
+  margin: 5px 0;
+}
 
-  .switcher {
-    width: 50px;
-    height: 30px;
-    background-color: #ccc;
-    border-radius: 15px;
-    position: fixed; /* Changement de position à fixe */
-    top: 10px; /* Distance depuis le haut de la page */
-    left: 10px; /* Distance depuis la gauche de la page */
-    transition: background-color 0.3s;
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#question-mark-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.question-mark {
+  position: absolute;
+  font-size: 4em;
+  color: rgba(117, 130, 22, 0.7);
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+}
+
+#quiz-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #dff6a5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode #quiz-container {
+  color: white;
+  background-color: rgb(28, 27, 27);
+}
+
+body h2 {
+  align-items: center; /* Centrer horizontalement */
+  justify-content: flex-start; /* Aligner en haut */
+}
+
+#question-text {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.answers label {
+  display: block;
+  margin: 10px 0;
+}
+
+button {
+  margin-top: 20px;
+  background-color: rgb(64, 178, 87);
+  border-radius: 5%;
+}
+
+.score {
+  margin-top: 20px;
+  font-size: 2em;
+}
+
+#next-button, #restart-button {
+  font-size: large;
+  height: 10%;
+  width: 50%;
+  position: fixed;
+  bottom: 250px; /* Position par rapport au bas de la fenêtre */
+  right: 400px; /* Position par rapport à la droite de la fenêtre */
+  z-index: 1; /* Assure que le bouton est au-dessus des autres éléments */
+}
+
+#restart-button {
+  background-color: rgb(159, 22, 22);
+}
+
+#timer {
+  position: fixed;
+  bottom: 80px; /* Position par rapport au bas de la fenêtre */
+  right: 50px; /* Position par rapport à la droite de la fenêtre */
+  z-index: 1; /* Assure que le timer est au-dessus des autres éléments */
+  font-size: 2rem;
+}
+
+.switcher {
+  width: 50px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 15px;
+  position: fixed; /* Changement de position à fixe */
+  top: 10px; /* Distance depuis le haut de la page */
+  left: 10px; /* Distance depuis la gauche de la page */
+  transition: background-color 0.3s;
 }
 
 .switcher::before {
-    content: "";
-    width: 26px;
-    height: 26px;
-    background-color: #fff;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: left 0.3s;
+  content: "";
+  width: 26px;
+  height: 26px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.3s;
 }
 
-
 .dark-mode .switcher {
-    background-color: #555;
+  background-color: #555;
 }
 
 .dark-mode .switcher::before {
-    left: calc(100% - 30px);
+  left: calc(100% - 30px);
 }
+
 #high-scores-container {
   position: fixed;
   bottom: 10px;
@@ -170,6 +175,7 @@ body {
 #high-scores-list li {
   margin: 1px 0;
 }
+
 body.dark-mode #quiz-container {
   background-color: #444;
 }
@@ -177,7 +183,9 @@ body.dark-mode #quiz-container {
 body.dark-mode #high-scores-container {
   background-color: #555;
   color: white;
-} #correction-container {
+}
+
+#correction-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -193,11 +201,22 @@ body.dark-mode #high-scores-container {
   box-sizing: border-box;
 }
 
+body.dark-mode #correction-container {
+  background-color: black;
+  color: rgb(213, 213, 244);
+}
+
 #correction-content {
   overflow-y: auto;
   flex: 1;
   width: 100%;
 }
+body.dark-mode .correct-answer-text {
+  background-color: rgb(2, 50, 2);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
 .correct-answer-text {
   background-color: lightgreen;
   padding: 2px 5px;
@@ -208,6 +227,7 @@ body.dark-mode #high-scores-container {
   position: absolute;
   bottom: 20px;
 }
+
 .hidden {
   display: none;
 }
