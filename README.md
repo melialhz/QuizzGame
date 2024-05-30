@@ -1,5 +1,7 @@
 # QuizzGame
 
+![image quizz](./front.jpg)
+
 ## Description du projet
 
 Le projet QuizzGame est une application de quiz développée en utilisant JavaScript (TypeScript) et Webpack. Il propose une série de questions aux utilisateurs et leur permet de répondre pour accumuler des points. L'application comprend un système de scores pour suivre les performances des utilisateurs.
