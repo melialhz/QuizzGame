@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="src/styles.css">
 </head>
 <body> 
+    
     <button id="mode-toggle" class="switcher"></button>
-    <div id="title-container">
-        <h2>Welcome to your QuizZ Game</h2>
-    </div>
-    <div id="score-container">
-        <h2>Your <span id="score">0</span></h2>
-    </div>
-    <div id="question-mark-container"></div>
+     <!-- Titre principal -->
+     <h1 >Welcome to your QuizZ Game</h1>
+      <!-- Score -->
+      <h1 >Your <span id="score">0</span></h1>
+      <div id="question-mark-container"></div>
+
     <div id="quiz-container">
         <div id="question-text"></div>
         <div class="answers"></div>
     </div>
+
     <button id="restart-button" style="display: none;">Recommencer</button>
     <button id="next-button">Suivant</button>
     <div id="high-scores-container">
@@ -27,6 +28,15 @@
         <ul id="high-scores-list"></ul>
     </div>
     <div id="timer"></div>
+
+    <div id="correction-container" style="display: none;">
+        <h1>Corrections</h1>
+        <div id="correction-content"></div>
+        <button id="restart-button-correction">Recommencer</button>
+    </div>
+   
+
+     
     <script src="dist/bundle.js"></script>
 </body>
 </html>

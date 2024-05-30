@@ -14,6 +14,10 @@ export class Quiz {
   private timerElement: HTMLElement;
   private highScoresContainer: HTMLElement;
   private highScoresList: HTMLElement;
+  private correctionContainer: HTMLElement;
+  private correctionContent: HTMLElement;
+  private restartButtonCorrection: HTMLElement;
+  private userAnswers: string[];
 
   constructor(questions: Question[], timePerQuestion = 8) {
     this.questions = questions;
@@ -21,6 +25,7 @@ export class Quiz {
     this.currentQuestionIndex = 0;
     this.score = 0;
     this.timer = null;
+    this.userAnswers = [];
 
     this.questionTextElement = document.getElementById("question-text")!;
     this.answersContainer = document.querySelector(".answers")!;
@@ -32,9 +37,17 @@ export class Quiz {
       "high-scores-container"
     )!;
     this.highScoresList = document.getElementById("high-scores-list")!;
+    this.correctionContainer = document.getElementById("correction-container")!;
+    this.correctionContent = document.getElementById("correction-content")!;
+    this.restartButtonCorrection = document.getElementById(
+      "restart-button-correction"
+    )!;
 
     this.nextButton.addEventListener("click", () => this.goToNextQuestion());
     this.restartButton.addEventListener("click", () => this.restartQuiz());
+    this.restartButtonCorrection.addEventListener("click", () =>
+      this.restartQuiz()
+    );
 
     this.displayQuestion();
     this.displayHighScores();
@@ -86,12 +99,16 @@ export class Quiz {
     const selectedAnswer = document.querySelector(
       'input[name="answer"]:checked'
     ) as HTMLInputElement;
-    if (
-      selectedAnswer &&
-      selectedAnswer.value ===
+    if (selectedAnswer) {
+      this.userAnswers[this.currentQuestionIndex] = selectedAnswer.value;
+      if (
+        selectedAnswer.value ===
         this.questions[this.currentQuestionIndex].correctAnswer
-    ) {
-      this.score++;
+      ) {
+        this.score++;
+      }
+    } else {
+      this.userAnswers[this.currentQuestionIndex] = "No answer";
     }
   }
 
@@ -112,16 +129,37 @@ export class Quiz {
     this.questionTextElement.textContent = `Quiz terminé ! Your score is : ${this.score}/${this.currentQuestionIndex}`;
     this.answersContainer.innerHTML = "";
     this.nextButton.style.display = "none";
-    this.restartButton.style.display = "block";
+    this.restartButton.style.display = "none";
+    this.correctionContainer.style.display = "flex";
     this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.currentQuestionIndex}`;
     this.resetTimer();
     this.saveHighScore();
     this.displayHighScores();
+    this.displayCorrections();
+  }
+
+  private displayCorrections() {
+    this.correctionContent.innerHTML = ""; // Clear previous corrections
+
+    this.questions.forEach((question, index) => {
+      const correctionItem = document.createElement("div");
+      const correctAnswerText = question.answers[question.correctAnswer];
+      const userAnswer = this.userAnswers[index];
+
+      correctionItem.innerHTML = `
+        <h2>Question ${index + 1}: ${question.questionText}</h2>
+        <h3>Your answer: ${userAnswer}</h3>
+        <h3 class="correct-answer-text"> Correct answer: <span >${correctAnswerText}</span></h3>
+      `;
+      this.correctionContent.appendChild(correctionItem);
+    });
   }
 
   private restartQuiz() {
     this.currentQuestionIndex = 0;
     this.score = 0;
+    this.userAnswers = [];
+    this.correctionContainer.style.display = "none";
     this.displayQuestion();
     this.restartButton.style.display = "none";
     this.nextButton.style.display = "block";
