@@ -18,6 +18,7 @@ export class Quiz {
   private correctionContent: HTMLElement;
   private restartButtonCorrection: HTMLElement;
   private userAnswers: string[];
+  private viewCorrectionButton: HTMLElement;
 
   constructor(questions: Question[], timePerQuestion = 8) {
     this.questions = questions;
@@ -26,6 +27,12 @@ export class Quiz {
     this.score = 0;
     this.timer = null;
     this.userAnswers = [];
+    this.viewCorrectionButton = document.getElementById(
+      "view-correction-button"
+    )!;
+    this.viewCorrectionButton.addEventListener("click", () =>
+      this.displayCorrections()
+    );
 
     this.questionTextElement = document.getElementById("question-text")!;
     this.answersContainer = document.querySelector(".answers")!;
@@ -124,23 +131,21 @@ export class Quiz {
 
     this.scoreElement.textContent = `Score : ${this.score}/${this.currentQuestionIndex}`;
   }
-
   private endQuiz() {
-    this.questionTextElement.textContent = `Quiz terminé ! Your score is : ${this.score}/${this.currentQuestionIndex}`;
+    this.questionTextElement.textContent = `Quiz terminé ! Votre score est : ${this.score}/${this.currentQuestionIndex}`;
     this.answersContainer.innerHTML = "";
     this.nextButton.style.display = "none";
-    this.restartButton.style.display = "none";
-    this.correctionContainer.style.display = "flex";
+    this.restartButton.style.display = "block"; // Affiche le bouton de redémarrage
+    this.viewCorrectionButton.style.display = "block"; // Affiche le bouton de correction
+    this.correctionContainer.style.display = "none"; // Masque les corrections au début
     this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.currentQuestionIndex}`;
     this.resetTimer();
     this.saveHighScore();
     this.displayHighScores();
-    this.displayCorrections();
   }
 
   private displayCorrections() {
-    this.correctionContent.innerHTML = ""; // Clear previous corrections
-
+    this.correctionContent.innerHTML = ""; // Efface les corrections précédentes
     this.questions.forEach((question, index) => {
       const correctionItem = document.createElement("div");
       const correctAnswerText = question.answers[question.correctAnswer];
@@ -149,17 +154,18 @@ export class Quiz {
       correctionItem.innerHTML = `
         <h2>Question ${index + 1}: ${question.questionText}</h2>
         <h3>Your answer: ${userAnswer}</h3>
-        <h3 class="correct-answer-text"> Correct answer: <span >${correctAnswerText}</span></h3>
+        <h3 class="correct-answer-text"> Correct answer: <span>${correctAnswerText}</span></h3>
       `;
       this.correctionContent.appendChild(correctionItem);
     });
+    this.correctionContainer.style.display = "flex"; // Affiche le conteneur de correction
   }
-
   private restartQuiz() {
     this.currentQuestionIndex = 0;
     this.score = 0;
     this.userAnswers = [];
     this.correctionContainer.style.display = "none";
+    this.viewCorrectionButton.style.display = "none"; // Masque le bouton de correction
     this.displayQuestion();
     this.restartButton.style.display = "none";
     this.nextButton.style.display = "block";
