@@ -212,3 +212,45 @@ body.dark-mode #high-scores-container {
   display: none;
 }
 
+/* CSS pour l'horloge */
+#clock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond transparente */
+  z-index: -1; /* Position en arrière-plan */
+}
+
+#clock-face {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  border: 10px solid rgba(0, 0, 0, 0.1); /* Bordure transparente */
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1); /* Fond transparent pour l'horloge */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#hand {
+  position: absolute;
+  width: 50%;
+  height: 4px;
+  background-color: rgba(255, 0, 0, 0.8); /* Aiguille avec une opacité */
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 50%;
+  transform: rotate(0deg);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Classe pour l'effet rouge */
+.red-background {
+  background-color: rgba(255, 0, 0, 0.3) !important; /* Fond rouge avec opacité */
+}

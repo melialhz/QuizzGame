@@ -18,7 +18,8 @@ export class Quiz {
   private correctionContent: HTMLElement;
   private restartButtonCorrection: HTMLElement;
   private userAnswers: string[];
-  private viewCorrectionButton: HTMLElement;
+  private clockHand: HTMLElement;
+  private clockElement: HTMLElement;
 
   constructor(questions: Question[], timePerQuestion = 8) {
     this.questions = questions;
@@ -27,12 +28,6 @@ export class Quiz {
     this.score = 0;
     this.timer = null;
     this.userAnswers = [];
-    this.viewCorrectionButton = document.getElementById(
-      "view-correction-button"
-    )!;
-    this.viewCorrectionButton.addEventListener("click", () =>
-      this.displayCorrections()
-    );
 
     this.questionTextElement = document.getElementById("question-text")!;
     this.answersContainer = document.querySelector(".answers")!;
@@ -49,6 +44,8 @@ export class Quiz {
     this.restartButtonCorrection = document.getElementById(
       "restart-button-correction"
     )!;
+    this.clockHand = document.getElementById("hand")!;
+    this.clockElement = document.getElementById("clock")!;
 
     this.nextButton.addEventListener("click", () => this.goToNextQuestion());
     this.restartButton.addEventListener("click", () => this.restartQuiz());
@@ -62,12 +59,24 @@ export class Quiz {
 
   private startTimer() {
     let timeLeft = this.timePerQuestion;
+    const totalRotation = 360; // Rotation complète de l'aiguille
+    const rotationStep = totalRotation / this.timePerQuestion;
+
     this.timer = window.setInterval(() => {
       if (timeLeft <= 0) {
         clearInterval(this.timer!);
         this.goToNextQuestion();
       } else {
         this.timerElement.textContent = `Temps restant : ${timeLeft} secondes`;
+        const rotation = (this.timePerQuestion - timeLeft) * rotationStep;
+        this.clockHand.style.transform = `rotate(${rotation}deg)`;
+
+        if (timeLeft <= 4) {
+          this.clockElement.classList.add("red-background");
+        } else {
+          this.clockElement.classList.remove("red-background");
+        }
+
         timeLeft--;
       }
     }, 1000);
@@ -79,6 +88,8 @@ export class Quiz {
       this.timer = null;
     }
     this.timerElement.textContent = "";
+    this.clockHand.style.transform = "rotate(0deg)";
+    this.clockElement.classList.remove("red-background");
   }
 
   private displayQuestion() {
@@ -131,17 +142,18 @@ export class Quiz {
 
     this.scoreElement.textContent = `Score : ${this.score}/${this.currentQuestionIndex}`;
   }
+
   private endQuiz() {
     this.questionTextElement.textContent = `Quiz terminé ! Votre score est : ${this.score}/${this.currentQuestionIndex}`;
     this.answersContainer.innerHTML = "";
     this.nextButton.style.display = "none";
     this.restartButton.style.display = "block"; // Affiche le bouton de redémarrage
-    this.viewCorrectionButton.style.display = "block"; // Affiche le bouton de correction
-    this.correctionContainer.style.display = "none"; // Masque les corrections au début
+    this.correctionContainer.style.display = "flex";
     this.scoreElement.textContent = `Voici votre score : ${this.score}/${this.currentQuestionIndex}`;
     this.resetTimer();
     this.saveHighScore();
     this.displayHighScores();
+    this.displayCorrections(); // Ajoutez cette ligne pour afficher les corrections
   }
 
   private displayCorrections() {
@@ -160,12 +172,12 @@ export class Quiz {
     });
     this.correctionContainer.style.display = "flex"; // Affiche le conteneur de correction
   }
+
   private restartQuiz() {
     this.currentQuestionIndex = 0;
     this.score = 0;
     this.userAnswers = [];
     this.correctionContainer.style.display = "none";
-    this.viewCorrectionButton.style.display = "none"; // Masque le bouton de correction
     this.displayQuestion();
     this.restartButton.style.display = "none";
     this.nextButton.style.display = "block";
@@ -176,14 +188,17 @@ export class Quiz {
     const highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
     highScores.push(this.score);
     highScores.sort((a: number, b: number) => b - a);
-    highScores.splice(5); // Keep only top 5 scores
+    highScores.splice(5); // Conserve uniquement les 5 meilleurs scores
     localStorage.setItem("highScores", JSON.stringify(highScores));
   }
 
   private displayHighScores() {
     const highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
-    this.highScoresList.innerHTML = highScores
-      .map((score: number) => `<li>${score}</li>`)
-      .join("");
+    this.highScoresList.innerHTML = "";
+    highScores.forEach((score: number) => {
+      const li = document.createElement("li");
+      li.textContent = score.toString();
+      this.highScoresList.appendChild(li);
+    });
   }
 }
